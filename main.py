@@ -1,9 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
 
 # read in the data
-data = pd.read_csv("country_wise_latest.csv",
-                   usecols=['Country/Region', 'Deaths', 'Recovered', 'WHO Region'])
+data = pd.read_csv("country_wise_latest.csv")
 
 # remove any duplicates
 cleaned_data = data.drop_duplicates()
@@ -11,8 +12,17 @@ cleaned_data = data.drop_duplicates()
 # remove missing rows
 cleaned_data = cleaned_data.dropna()
 
+# show first 5 rows
+print(cleaned_data.head())
+
+# show final 5 rows
+print(cleaned_data.tail())
+
 # sort the data
 sorted_data = cleaned_data.sort_values('Recovered', ascending=False)
+
+# print sorted data
+print(sorted_data)
 
 # index the data
 indexed_data = sorted_data.reset_index(drop=True)
@@ -64,3 +74,28 @@ ax.set_xlabel('WHO Region')
 ax.set_ylabel('Recovered (green) vs Deaths (red)')
 
 plt.show()
+
+# plot
+sns.lineplot(x=data['WHO Region'].head(5),y=data['Deaths'].head(5))
+
+plt.show()
+
+sns.lineplot(x=data['WHO Region'].head(5),y=data['Recovered'].head(5))
+
+plt.show()
+
+# Seaborn Plot
+sns.set_theme(style="whitegrid")
+sns.barplot(x=data.Confirmed, y=data.Recovered)
+plt.title("Confirmed vs Recovered")
+plt.ylabel("Recovered")
+plt.xlabel("Confirmed")
+plt.ylim(0,1000)
+plt.xlim(0,1000)
+plt.show()
+
+# loop and list
+for col in data.columns:
+    print(col)
+
+print(data.columns.values)
