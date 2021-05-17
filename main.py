@@ -18,6 +18,9 @@ print(cleaned_data.head())
 # show final 5 rows
 print(cleaned_data.tail())
 
+# print the columns
+print(cleaned_data.columns)
+
 # sort the data
 sorted_data = cleaned_data.sort_values('Recovered', ascending=False)
 
@@ -26,9 +29,6 @@ print(sorted_data)
 
 # index the data
 indexed_data = sorted_data.reset_index(drop=True)
-
-# print the columns
-print(indexed_data.columns)
 
 # group the data
 grouped_data = indexed_data.groupby(['WHO Region', 'Deaths', 'Recovered']).agg('sum')
