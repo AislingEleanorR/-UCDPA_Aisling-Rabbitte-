@@ -27,6 +27,9 @@ print(sorted_data)
 # index the data
 indexed_data = sorted_data.reset_index(drop=True)
 
+# print the columns
+print(indexed_data.columns)
+
 # group the data
 grouped_data = indexed_data.groupby(['WHO Region', 'Deaths', 'Recovered']).agg('sum')
 
@@ -41,7 +44,7 @@ print(f'Sorted: \n{sorted_data} \n')
 print(f'Indexed: \n{indexed_data} \n')
 print(f'Grouped: \n{grouped_data} \n')
 
-# plot
+# plot 1
 fig, ax = plt.subplots()
 x_axis = indexed_data['Country/Region']
 y_axis_names = indexed_data['WHO Region'].unique()
@@ -73,18 +76,13 @@ ax.set_title('Recovered vs Deaths per WHO Region')
 ax.set_xlabel('WHO Region')
 ax.set_ylabel('Recovered (green) vs Deaths (red)')
 
-plt.show()
-
-# plot
 sns.lineplot(x=data['WHO Region'].head(5),y=data['Deaths'].head(5))
-
 plt.show()
 
 sns.lineplot(x=data['WHO Region'].head(5),y=data['Recovered'].head(5))
 
 plt.show()
 
-# Seaborn Plot
 sns.set_theme(style="whitegrid")
 sns.barplot(x=data.Confirmed, y=data.Recovered)
 plt.title("Confirmed vs Recovered")
@@ -94,8 +92,48 @@ plt.ylim(0,1000)
 plt.xlim(0,1000)
 plt.show()
 
-# loop and list
-for col in data.columns:
-    print(col)
+# list of top 3 countries highest confirmed cases using numpy array to print the first country
+confirmed = ["US", 4290259, "Brazil", 2442375, "India", 1480073]
 
-print(data.columns.values)
+print(confirmed)
+
+first = confirmed[0]
+
+print(first)
+
+# list of top 3 countries with recovered cases using numpy array to print the first country
+recovered = ["Brazil", 1846641, "US", 1325804, "India", 951166]
+
+print(recovered)
+
+top = recovered[0]
+
+print(top)
+
+# list of top 3 deaths
+
+death = ["US", 148011, "Brazil", 87618, "United Kingdom", 45844]
+
+print(death)
+
+highest = death[0]
+
+print(highest)
+
+# plot 3 highest countries with confirmed cases
+y = np.array([4290259, 2442375, 1480073])
+mylabels = ["US", "Brazil", "India"]
+
+plt.pie(y, labels = mylabels, startangle = 90, shadow= True)
+plt.legend(title = "3 highest confirmed cases per country:")
+plt.legend()
+plt.show()
+
+# plot 3 highest countries with recovered cases
+y = np.array([1846641, 1325804, 951166])
+mylabels = ["Brazil", "US", "India"]
+
+plt.pie(y, labels = mylabels, startangle = 90)
+plt.legend(title = "3 highest recovered cases per country:")
+plt.legend()
+plt.show()
